@@ -76,7 +76,7 @@ dependencies {
     implementation(Libraries.cardview)
     // other modules
     implementation(project(":presentation-layer"))
-//    implementation(project(":domain-layer"))
+    implementation(project(":domain-layer"))
 //    implementation(project(":data-layer"))
     // 3rd party libraries
     debugImplementation(Libraries.leakCanary)

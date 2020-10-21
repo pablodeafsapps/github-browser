@@ -2,7 +2,6 @@ plugins {
     id(Plugins.androidLibrary)
 
     id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinAndroidExtensions)
     id(Plugins.kotlinKapt)
     // add automatic documentation generator feature
     id(Plugins.dokka)
@@ -26,25 +25,11 @@ android {
     sourceSets {
         getByName("main") { java.srcDir("src/main/kotlin") }
         getByName("test") { java.srcDir("src/test/kotlin") }
-        getByName("androidTest") { java.srcDir("src/androidTest/kotlin") }
-    }
-    buildFeatures {
-        viewBinding = true
     }
     lintOptions {
         isAbortOnError = false
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-
 }
-
-androidExtensions.isExperimental = true
 
 tasks {
     val dokka by getting(org.jetbrains.dokka.gradle.DokkaTask::class) {
@@ -59,21 +44,14 @@ tasks {
 dependencies {
     implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
     implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.appCompat)
-    implementation(Libraries.lifecycle)
-    implementation(Libraries.constraintLayout)
-    implementation(Libraries.recyclerview)
-    implementation(Libraries.cardview)
-    // other modules
-    implementation(project(":domain-layer"))
+    implementation(Libraries.kotlinCoroutinesCore)
+    implementation(Libraries.kotlinCoroutinesAndroid)
     // 3rd party libraries
+    api(Libraries.arrowCore)
+    api(Libraries.arrowSyntax)
+    kapt(Libraries.arrowMeta)
     // testing dependencies - Unit Test
     testImplementation(Libraries.junit)
     testImplementation(Libraries.mockitoKotlin)
     testImplementation(Libraries.kotlinCoroutinesTest)
-    // testing dependencies - Instrumentation Test
-    androidTestImplementation(Libraries.mockitoAndroid)
-    androidTestImplementation(Libraries.testRunner)
-    androidTestImplementation(Libraries.testRules)
-    androidTestImplementation(Libraries.espresso)
 }
