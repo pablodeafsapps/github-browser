@@ -15,7 +15,7 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = Libraries.testRunner
+        testInstrumentationRunner = Libraries.instrumentationRunner
     }
     buildTypes {
         named("release").configure {
@@ -26,10 +26,6 @@ android {
     sourceSets {
         getByName("main") { java.srcDir("src/main/kotlin") }
         getByName("test") { java.srcDir("src/test/kotlin") }
-        getByName("androidTest") { java.srcDir("src/androidTest/kotlin") }
-    }
-    buildFeatures {
-        viewBinding = true
     }
     lintOptions {
         isAbortOnError = false
@@ -41,10 +37,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
 }
-
-androidExtensions.isExperimental = true
 
 tasks {
     val dokka by getting(org.jetbrains.dokka.gradle.DokkaTask::class) {
@@ -59,15 +52,17 @@ tasks {
 dependencies {
     implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
     implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.appCompat)
-    implementation(Libraries.lifecycle)
-    implementation(Libraries.constraintLayout)
-    implementation(Libraries.recyclerview)
-    implementation(Libraries.cardview)
+    implementation(Libraries.kotlinCoroutinesCore)
+    implementation(Libraries.retrofitCoroutinesAdapter)
     // other modules
     implementation(project(":domain-layer"))
     // 3rd party libraries
     kapt(Libraries.daggerCompiler)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitMoshiConverter)
+    implementation(Libraries.moshi)
+    implementation(Libraries.moshiKotlin)
+    kapt(Libraries.moshiKotlinCodegen)
     // testing dependencies - Unit Test
     testImplementation(Libraries.junit)
     testImplementation(Libraries.mockitoKotlin)

@@ -50,6 +50,8 @@ dependencies {
     api(Libraries.arrowCore)
     api(Libraries.arrowSyntax)
     kapt(Libraries.arrowMeta)
+    api(Libraries.dagger)
+    kapt(Libraries.daggerCompiler)
     // testing dependencies - Unit Test
     testImplementation(Libraries.junit)
     testImplementation(Libraries.mockitoKotlin)

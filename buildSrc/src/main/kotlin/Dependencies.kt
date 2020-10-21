@@ -48,6 +48,9 @@ object Libraries {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     const val cardview = "androidx.cardview:cardview:${Versions.cardView}"
+    // dagger
+    const val dagger = "com.google.dagger:dagger:${Versions.daggerVersion}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.daggerVersion}"
     // google
     const val googleMaterial = "com.google.android.material:material:${Versions.googleMaterial}"
     // leakCanary
@@ -81,6 +84,7 @@ object Libraries {
         const val cardView = "1.0.0"
         // 3rd party
         const val leakCanary = "2.2"
+        const val daggerVersion = "2.28"
         const val googleMaterial = "1.1.0-alpha08"
         const val arrow = "0.11.0"
         const val retrofit = "2.8.1"

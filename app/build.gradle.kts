@@ -7,6 +7,7 @@ plugins {
     id(Plugins.androidApplication)
 
     id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinKapt)
     // add automatic documentation generator feature
     id(Plugins.dokka)
     // add overlaid launcher icons feature
@@ -77,8 +78,9 @@ dependencies {
     // other modules
     implementation(project(":presentation-layer"))
     implementation(project(":domain-layer"))
-//    implementation(project(":data-layer"))
+    implementation(project(":data-layer"))
     // 3rd party libraries
+    kapt(Libraries.daggerCompiler)
     debugImplementation(Libraries.leakCanary)
 }
 
