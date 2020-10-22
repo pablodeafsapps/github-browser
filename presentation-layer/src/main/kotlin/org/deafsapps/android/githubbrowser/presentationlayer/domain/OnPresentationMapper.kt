@@ -1,22 +1,28 @@
 package org.deafsapps.android.githubbrowser.presentationlayer.domain
 
 import org.deafsapps.android.githubbrowser.domainlayer.domain.FailureBo
-
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
+import org.deafsapps.android.githubbrowser.domainlayer.domain.OwnerBo
 
 private const val DEFAULT_STRING_VALUE = "none"
 
-/**
- * Extension function which maps a list of joke Business Objects to a list of joke Visual Objects
- *
- * @return the list of [JokeVo] type equivalent data
- *
- * @author Pablo L. Sordo
- * @since 1.0
- */
-fun List<JokeBo>.boToVo(): List<JokeVo> = map { it.boToVo() }
+fun List<DataRepoBo>.boToVo() = map { it.boToVo() }
 
-private fun JokeBo.boToVo(): JokeVo =
-    JokeVo(id = id, joke = joke, categories = categories)
+fun DataRepoBo.boToVo() = DataRepoVo(
+    id = id,
+    name = name,
+    owner = owner.boToVo(),
+    htmlUrl = htmlUrl,
+    description = description,
+    stars = stars,
+    forks = forks
+)
+
+private fun OwnerBo.boToVo() = OwnerVo(
+    login = login,
+    profilePic = profilePic,
+    type = type
+)
 
 /**
  * Extension function which maps a failure Business Object to a failure Visual Object

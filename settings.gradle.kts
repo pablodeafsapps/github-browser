@@ -1,5 +1,5 @@
-include(":data-layer")
-include(":domain-layer")
-include(":presentation-layer")
 include(":app")
+include(":presentation-layer")
+include(":domain-layer")
+include(":data-layer")
 rootProject.name = "github-browser"

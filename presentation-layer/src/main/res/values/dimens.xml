@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fully_stretchable">0dp</dimen>
+    <dimen name="four">4dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="thirty_two">32dp</dimen>
+    <dimen name="hundred">100dp</dimen>
+    <!-- text -->
+    <dimen name="text_eighteen">18sp</dimen>
+</resources>

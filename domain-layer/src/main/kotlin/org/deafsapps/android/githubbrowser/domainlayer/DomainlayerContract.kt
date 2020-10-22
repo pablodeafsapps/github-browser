@@ -31,17 +31,11 @@ interface DomainlayerContract {
     interface Datalayer {
 
         companion object {
-            const val AUTHENTICATION_REPOSITORY_TAG = "authenticationRepository"
             const val DATA_REPOSITORY_TAG = "dataRepository"
         }
 
-        interface AuthenticationRepository<in T, out S> {
-            fun loginUser(params: T): Either<FailureBo, S>
-            fun registerUser(params: T): Either<FailureBo, S>
-        }
-
         interface DataRepository<out T> {
-            suspend fun fetchJokes(): Either<FailureBo, T>
+            suspend fun fetchDataRepositories(): Either<FailureBo, T>
         }
 
     }

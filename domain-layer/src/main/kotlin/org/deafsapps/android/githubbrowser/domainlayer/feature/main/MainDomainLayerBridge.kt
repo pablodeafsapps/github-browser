@@ -14,13 +14,13 @@ interface MainDomainLayerBridge<out S> : BaseDomainLayerBridge {
 
 }
 
-internal class MainDomainLayerBridgeImpl(private val fetchJokesUc: DomainlayerContract.Presentationlayer.UseCase<Any, String>) :
+internal class MainDomainLayerBridgeImpl(private val fetchDataRepositoriesUc: DomainlayerContract.Presentationlayer.UseCase<Any, String>) :
     MainDomainLayerBridge<String> {
 
     override fun fetchDataRepositories(
         scope: CoroutineScope, onResult: (Either<FailureBo, String>) -> Unit
     ) {
-        fetchJokesUc.invoke(scope = scope, onResult = onResult)
+        fetchDataRepositoriesUc.invoke(scope = scope, onResult = onResult)
     }
 
 }

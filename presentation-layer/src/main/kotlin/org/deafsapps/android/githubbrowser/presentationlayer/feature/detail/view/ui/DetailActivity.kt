@@ -6,25 +6,33 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.deafsapps.android.githubbrowser.domainlayer.base.BaseDomainLayerBridge
+import org.deafsapps.android.githubbrowser.presentationlayer.R
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmView
+import org.deafsapps.android.githubbrowser.presentationlayer.base.ScreenState
+import org.deafsapps.android.githubbrowser.presentationlayer.databinding.ActivityDetailBinding
+import org.deafsapps.android.githubbrowser.presentationlayer.domain.DataRepoVo
 import org.deafsapps.android.githubbrowser.presentationlayer.domain.FailureVo
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.detail.view.state.DetailState
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.detail.viewmodel.DetailViewModel
 
 @ExperimentalCoroutinesApi
 class DetailActivity : AppCompatActivity(),
-    BaseMvvmView<DetailActivityViewModel, BaseDomainLayerBridge.None, DetailState> {
+    BaseMvvmView<DetailViewModel, BaseDomainLayerBridge.None, DetailState> {
 
-    override val viewModel: DetailActivityViewModel by viewModel()
+    private lateinit var _viewModel: DetailViewModel
+    override val viewModel: DetailViewModel by lazy { _viewModel }
     private lateinit var viewBinding: ActivityDetailBinding
-    private var jokeItem: JokeVo? = null
+    private var jokeItem: DataRepoVo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
         initModel()
         setContentView(viewBinding.root)
-        jokeItem = intent.getParcelableExtra(INTENT_DATA_KEY) as? JokeVo
+//        jokeItem = intent.getParcelableExtra(INTENT_DATA_KEY) as? JokeVo
     }
 
     override fun onResume() {
@@ -34,7 +42,7 @@ class DetailActivity : AppCompatActivity(),
 
     override fun processRenderState(renderState: DetailState) {
         when (renderState) {
-            is DetailState.ShowJokeInfo -> loadJokeItem(renderState.joke)
+            is DetailState.ShowDataRepoInfo -> loadJokeItem(renderState.dataRepo)
             is DetailState.ShowError -> showError(renderState.failure)
         }
     }
@@ -51,11 +59,11 @@ class DetailActivity : AppCompatActivity(),
         }
     }
 
-    private fun loadJokeItem(item: JokeVo) {
+    private fun loadJokeItem(item: DataRepoVo) {
         with(viewBinding) {
-            tvId.text = getString(R.string.tv_detail_id, item.id?.toString() ?: "")
-            tvJoke.text = HtmlCompat.fromHtml(item.joke ?: "", HtmlCompat.FROM_HTML_MODE_COMPACT)
-            tvCategories.text = item.categories.takeIf { it?.isNotEmpty() == true }?.toString()
+            tvId.text = getString(R.string.tv_detail_id, item.name)
+//            tvJoke.text = HtmlCompat.fromHtml(item.joke ?: "", HtmlCompat.FROM_HTML_MODE_COMPACT)
+//            tvCategories.text = item.categories.takeIf { it?.isNotEmpty() == true }?.toString()
         }
     }
 

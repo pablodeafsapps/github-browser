@@ -2,11 +2,27 @@ package org.deafsapps.android.githubbrowser.domainlayer.domain
 
 private const val DEFAULT_STRING_RESOURCE = -1
 
-data class UserLoginBo(val email: String, val password: String)
+data class DataRepoBoWrapper(
+    val totalCount: Int,
+    val incomplete_results: Boolean,
+    val items: List<DataRepoBo>
+)
 
-data class JokeBoWrapper(val type: String, val value: List<JokeBo>)
+data class DataRepoBo(
+    val id: Long,
+    val name: String,
+    val owner: OwnerBo,
+    val htmlUrl: String,
+    val description: String,
+    val stars: Int,
+    val forks: Int
+)
 
-data class JokeBo(val id: Int, val joke: String, val categories: List<String>)
+data class OwnerBo(
+    val login: String,
+    val profilePic: String,
+    val type: String
+)
 
 sealed class FailureBo(var msgRes: Int = DEFAULT_STRING_RESOURCE) {
     class NoConnection(msgRes: Int): FailureBo(msgRes = msgRes)

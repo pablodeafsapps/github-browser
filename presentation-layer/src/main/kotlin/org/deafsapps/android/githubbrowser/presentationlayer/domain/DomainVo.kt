@@ -1,17 +1,28 @@
 package org.deafsapps.android.githubbrowser.presentationlayer.domain
 
-import android.os.Parcelable
 import androidx.annotation.StringRes
-import kotlinx.android.parcel.Parcelize
 
-/**
- * This data class represents the Visual Object related to a joke datum
- *
- * @author Pablo L. Sordo
- * @since 1.0
- */
-@Parcelize
-data class JokeVo(val id: Int?, val joke: String?, val categories: List<String>?) : CnJokeView.JokeTypeOne(), Parcelable
+data class GithubRepoVoWrapper(
+    val totalCount: Int,
+    val incomplete_results: Boolean,
+    val items: List<DataRepoVo>
+)
+
+data class DataRepoVo(
+    val id: Long,
+    val name: String,
+    val owner: OwnerVo,
+    val htmlUrl: String,
+    val description: String,
+    val stars: Int,
+    val forks: Int
+)
+
+data class OwnerVo(
+    val login: String,
+    val profilePic: String,
+    val type: String
+)
 
 /**
  * This sealed class contains the 'failure' type definitions to be used in the 'presentation-layer' module
