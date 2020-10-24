@@ -1,22 +1,27 @@
 package org.deafsapps.android.githubbrowser.presentationlayer.domain
 
 import androidx.annotation.StringRes
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.view.adapter.DataView
 
 data class GithubRepoVoWrapper(
     val totalCount: Int,
-    val incomplete_results: Boolean,
+    val incompleteResults: Boolean,
     val items: List<DataRepoVo>
 )
 
+data class Timestamp(
+    val timestamp: String
+) : DataView.UpdateTimestamp()
+
 data class DataRepoVo(
-    val id: Long,
+    val id: kotlin.Long,
     val name: String,
     val owner: OwnerVo,
     val htmlUrl: String,
     val description: String,
     val stars: Int,
     val forks: Int
-)
+) : DataView.DataRepoType()
 
 data class OwnerVo(
     val login: String,

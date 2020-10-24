@@ -6,8 +6,6 @@ import okhttp3.ResponseBody
 import org.deafsapps.android.githubbrowser.domainlayer.R
 
 data class GithubRepoDtoWrapper(
-    val totalCount: Int?,
-    val incomplete_results: Boolean?,
     val items: List<GithubRepoDto>
 )
 
@@ -36,9 +34,7 @@ sealed class FailureDto(val msgRes: Int?) {
     }
 
     object NoConnection : FailureDto(msgRes = R.string.error_no_connection)
-    class RequestError(
-        val code: Int = DEFAULT_ERROR_CODE, msgRes: Int?, val errorBody: ResponseBody? = null
-    ) : FailureDto(msgRes = msgRes)
+    class RequestError(val code: Int = DEFAULT_ERROR_CODE, msgRes: Int?, val errorBody: ResponseBody? = null) : FailureDto(msgRes = msgRes)
     class Error(msgRes: Int?) : FailureDto(msgRes = msgRes)
     object NoData : FailureDto(msgRes = R.string.error_no_data)
     object Unknown : FailureDto(msgRes = R.string.error_unknown)

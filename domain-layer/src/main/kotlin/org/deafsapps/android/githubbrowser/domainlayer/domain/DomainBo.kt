@@ -3,8 +3,8 @@ package org.deafsapps.android.githubbrowser.domainlayer.domain
 private const val DEFAULT_STRING_RESOURCE = -1
 
 data class DataRepoBoWrapper(
-    val totalCount: Int,
-    val incomplete_results: Boolean,
+//    val totalCount: Int,
+//    val incompleteResults: Boolean,
     val items: List<DataRepoBo>
 )
 

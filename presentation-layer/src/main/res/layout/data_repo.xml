@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/joke_item_one__card__root"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="@dimen/eight"
+    android:layout_marginTop="@dimen/four"
+    android:layout_marginEnd="@dimen/eight"
+    android:layout_marginBottom="@dimen/four"
+    app:cardCornerRadius="@dimen/eight">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRepoName"
+            android:layout_width="@dimen/fully_stretchable"
+            android:layout_height="@dimen/fully_stretchable"
+            android:layout_margin="@dimen/eight"
+            android:layout_marginBottom="@dimen/eight"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="3"
+            android:text="@string/tv_placeholder_text_one"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/tvRepoDescription"
+            app:layout_constraintEnd_toStartOf="@id/ivProfilePic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRepoDescription"
+            android:layout_width="@dimen/fully_stretchable"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/eight"
+            android:layout_marginLeft="@dimen/eight"
+            android:layout_marginEnd="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
+            android:layout_marginBottom="@dimen/eight"
+            android:gravity="end"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="categories" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProfilePic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="@dimen/eight"
+            android:contentDescription="@string/default_content_description"
+            app:layout_constraintBottom_toTopOf="@id/tvRepoDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_github_logo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

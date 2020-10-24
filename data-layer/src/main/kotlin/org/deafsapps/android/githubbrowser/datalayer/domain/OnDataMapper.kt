@@ -11,12 +11,12 @@ private const val DEFAULT_BOOLEAN_VALUE = false
 private const val DEFAULT_STRING_VALUE = "none"
 
 fun GithubRepoDtoWrapper.dtoToBo() = DataRepoBoWrapper(
-    totalCount = totalCount ?: DEFAULT_INTEGER_VALUE,
-    incomplete_results = incomplete_results ?: DEFAULT_BOOLEAN_VALUE,
+//    totalCount = totalCount ?: DEFAULT_INTEGER_VALUE,
+//    incompleteResults = incompleteResults ?: DEFAULT_BOOLEAN_VALUE,
     items = items.dataRepoListToBo()
 )
 
-private fun List<GithubRepoDto>.dataRepoListToBo() = map { it.dtoToBo() }
+fun List<GithubRepoDto>.dataRepoListToBo() = map { it.dtoToBo() }
 
 private fun GithubRepoDto.dtoToBo() = DataRepoBo(
     id = id ?: DEFAULT_LONG_VALUE,

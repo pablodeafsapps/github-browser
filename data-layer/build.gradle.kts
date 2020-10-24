@@ -58,8 +58,8 @@ dependencies {
     implementation(project(":domain-layer"))
     // 3rd party libraries
     kapt(Libraries.daggerCompiler)
-    implementation(Libraries.retrofit)
     implementation(Libraries.retrofitMoshiConverter)
+    implementation(Libraries.okhttpInterceptor)
     implementation(Libraries.moshi)
     implementation(Libraries.moshiKotlin)
     kapt(Libraries.moshiKotlinCodegen)
