@@ -5,12 +5,15 @@ import org.deafsapps.android.githubbrowser.domainlayer.base.BaseDomainLayerBridg
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmViewModel
 import org.deafsapps.android.githubbrowser.presentationlayer.base.ScreenState
 import org.deafsapps.android.githubbrowser.presentationlayer.feature.splash.view.state.SplashState
+import javax.inject.Inject
+
+const val SPLASH_VIEW_MODEL_TAG = "splashViewModel"
 
 @ExperimentalCoroutinesApi
-class SplashActivityViewModel(bridge: BaseDomainLayerBridge.None) :
+class SplashViewModel @Inject constructor(bridge: BaseDomainLayerBridge.None) :
     BaseMvvmViewModel<BaseDomainLayerBridge.None, SplashState>(bridge = bridge) {
 
-    fun onViewCreated() {
+    fun onViewResumed() {
         _screenState.value = ScreenState.Render(SplashState.LoadingFinished)
     }
 

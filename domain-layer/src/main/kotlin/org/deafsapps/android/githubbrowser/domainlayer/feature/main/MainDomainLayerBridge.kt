@@ -4,9 +4,14 @@ import arrow.core.Either
 import kotlinx.coroutines.CoroutineScope
 import org.deafsapps.android.githubbrowser.domainlayer.DomainlayerContract
 import org.deafsapps.android.githubbrowser.domainlayer.base.BaseDomainLayerBridge
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBoWrapper
 import org.deafsapps.android.githubbrowser.domainlayer.domain.FailureBo
+import org.deafsapps.android.githubbrowser.domainlayer.usecase.FETCH_DATA_REPOSITORIES_UC_TAG
+import javax.inject.Inject
+import javax.inject.Named
 
-const val MAIN_DOMAIN_BRIDGE_TAG = "mainDomainLayerBridge"
+const val MAIN_DOMAIN_BRIDGE_TAG = "mainDomainBridge"
 
 interface MainDomainLayerBridge<out S> : BaseDomainLayerBridge {
 
@@ -14,11 +19,13 @@ interface MainDomainLayerBridge<out S> : BaseDomainLayerBridge {
 
 }
 
-internal class MainDomainLayerBridgeImpl(private val fetchDataRepositoriesUc: DomainlayerContract.Presentationlayer.UseCase<Any, String>) :
-    MainDomainLayerBridge<String> {
+class MainDomainLayerBridgeImpl @Inject constructor(
+    @Named(FETCH_DATA_REPOSITORIES_UC_TAG)
+    private val fetchDataRepositoriesUc: @JvmSuppressWildcards DomainlayerContract.Presentationlayer.UseCase<Any, List<DataRepoBo>>
+) : MainDomainLayerBridge<List<DataRepoBo>> {
 
     override fun fetchDataRepositories(
-        scope: CoroutineScope, onResult: (Either<FailureBo, String>) -> Unit
+        scope: CoroutineScope, onResult: (Either<FailureBo, List<DataRepoBo>>) -> Unit
     ) {
         fetchDataRepositoriesUc.invoke(scope = scope, onResult = onResult)
     }

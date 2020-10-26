@@ -1,8 +1,8 @@
 <resources>
     <string name="tv_title_text">GITHUB REPOSITORIES</string>
     <string name="tv_no_data_text">No Data</string>
-    <string name="tv_placeholder_text_one">This text represents a data repository joke to be fetched and displayed on the main screen</string>
-    <string name="tv_placeholder_text_two">Data repository type 2</string>
+    <string name="tv_placeholder_text_one">This text represents a data repository to be fetched and displayed on the main screen</string>
+    <string name="tv_placeholder_text_two">This text represents a timestamp</string>
     <string name="tv_detail_id">#%1$s</string>
     <string name="default_content_description">image</string>
 </resources>

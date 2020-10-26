@@ -60,6 +60,7 @@ object Libraries {
     const val retrofitCoroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutinesAdapter}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshiKotlinCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
@@ -89,6 +90,7 @@ object Libraries {
         const val googleMaterial = "1.1.0-alpha08"
         const val arrow = "0.11.0"
         const val retrofit = "2.8.1"
+        const val okhttp = "4.2.1"
         const val moshi = "1.9.3"
         // test
         const val junit = "4.13"

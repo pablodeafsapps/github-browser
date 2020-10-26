@@ -50,6 +50,7 @@ dependencies {
     api(Libraries.arrowCore)
     api(Libraries.arrowSyntax)
     kapt(Libraries.arrowMeta)
+    api(Libraries.retrofit)
     api(Libraries.dagger)
     kapt(Libraries.daggerCompiler)
     // testing dependencies - Unit Test

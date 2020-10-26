@@ -6,6 +6,6 @@ import org.deafsapps.android.githubbrowser.presentationlayer.domain.FailureVo
 
 sealed class MainState : BaseState() {
     class ShowDataRepoList(val dataRepoList: List<DataRepoVo>) : MainState()
-    class ShowDataRepoDetail(val dataRepo: DataRepoVo) : MainState()
+    class ShowDataRepoDetail(val dataRepoId: Long) : MainState()
     class ShowError(val failure: FailureVo?) : MainState()
 }

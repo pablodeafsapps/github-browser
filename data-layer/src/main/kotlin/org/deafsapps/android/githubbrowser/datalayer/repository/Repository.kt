@@ -4,14 +4,15 @@ import arrow.core.Either
 import org.deafsapps.android.githubbrowser.datalayer.datasource.RepositoryDataSource
 import org.deafsapps.android.githubbrowser.datalayer.domain.FailureDto
 import org.deafsapps.android.githubbrowser.domainlayer.DomainlayerContract
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
 import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBoWrapper
 import org.deafsapps.android.githubbrowser.domainlayer.domain.FailureBo
 
-object Repository : DomainlayerContract.Datalayer.DataRepository<DataRepoBoWrapper> {
+object Repository : DomainlayerContract.Datalayer.DataRepository<List<DataRepoBo>> {
 
     lateinit var repositoryDataSource: RepositoryDataSource
 
-    override suspend fun fetchDataRepositories(): Either<FailureBo, DataRepoBoWrapper> =
+    override suspend fun fetchDataRepositories(): Either<FailureBo, List<DataRepoBo>> =
         repositoryDataSource.fetchDataRepositoriesResponse()
 
 }

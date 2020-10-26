@@ -1,38 +1,49 @@
 package org.deafsapps.android.githubbrowser.presentationlayer.feature.main.view.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBoWrapper
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
 import org.deafsapps.android.githubbrowser.domainlayer.feature.main.MainDomainLayerBridge
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmView
+import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmViewModel
 import org.deafsapps.android.githubbrowser.presentationlayer.base.ScreenState
 import org.deafsapps.android.githubbrowser.presentationlayer.databinding.ActivityMainBinding
+import org.deafsapps.android.githubbrowser.presentationlayer.di.MainComponent
+import org.deafsapps.android.githubbrowser.presentationlayer.di.MainComponentFactoryProvider
 import org.deafsapps.android.githubbrowser.presentationlayer.domain.FailureVo
-import org.deafsapps.android.githubbrowser.presentationlayer.domain.DataRepoVo
 import org.deafsapps.android.githubbrowser.presentationlayer.feature.detail.view.ui.DetailActivity
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.view.adapter.DataRepoListAdapter
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.view.adapter.DataView
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.view.adapter.DataViewAction
 import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.view.state.MainState
+import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.viewmodel.MAIN_VIEW_MODEL_TAG
 import org.deafsapps.android.githubbrowser.presentationlayer.feature.main.viewmodel.MainViewModel
+import javax.inject.Inject
+import javax.inject.Named
 
 const val INTENT_DATA_KEY = "dataRepoItemId"
 
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity(),
-    BaseMvvmView<MainViewModel, MainDomainLayerBridge<DataRepoBoWrapper>, MainState> {
+    BaseMvvmView<MainViewModel, MainDomainLayerBridge<List<DataRepoBo>>, MainState> {
 
-    lateinit var _viewModel: MainViewModel
-    override val viewModel: MainViewModel by lazy { _viewModel }
+    @Inject
+    @Named(MAIN_VIEW_MODEL_TAG)
+    lateinit var _viewModel: BaseMvvmViewModel<MainDomainLayerBridge<List<DataRepoBo>>, MainState>
+    override val viewModel: MainViewModel by lazy { _viewModel as MainViewModel }
     private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        getMainComponent().inject(this)
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         initModel()
@@ -44,7 +55,7 @@ class MainActivity : AppCompatActivity(),
     override fun processRenderState(renderState: MainState) {
         when (renderState) {
             is MainState.ShowDataRepoList -> loadReposData(renderState.dataRepoList)
-            is MainState.ShowDataRepoDetail -> navigateToDetailView(renderState.dataRepo)
+            is MainState.ShowDataRepoDetail -> navigateToDetailView(renderState.dataRepoId)
             is MainState.ShowError -> showError(renderState.failure)
         }
     }
@@ -67,19 +78,19 @@ class MainActivity : AppCompatActivity(),
     private fun initView() {
         with(viewBinding.rvItems) {
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-//            adapter = CnJokeListAdapter(itemList = mutableListOf()) { action ->
-//                when (action) {
-//                    is CnJokeActionView.JokeItemTapped -> viewModel.onJokeItemSelected(action.item)
-//                    CnJokeActionView.JokeItemLongSelected -> longToast("Item long-clicked")
-//                }
-//            }
+            adapter = DataRepoListAdapter(itemList = mutableListOf()) { action ->
+                when (action) {
+                    is DataViewAction.DataRepoTapped -> viewModel.onDataRepositorySelected(action.item.id)
+                    DataViewAction.DataRepoLongSelected -> Toast.makeText(this@MainActivity, "Item long-clicked", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
-    private fun loadReposData(data: List<DataRepoVo>) {
+    private fun loadReposData(data: List<DataView>) {
         with(viewBinding) {
             tvNoData.visibility = View.GONE
-//            (rvItems.adapter as? CnJokeListAdapter)?.updateData(data)
+            (rvItems.adapter as? DataRepoListAdapter)?.updateData(data)
         }
     }
 
@@ -97,8 +108,8 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    private fun navigateToDetailView(item: DataRepoVo) {
-        startActivity(Intent(this, DetailActivity::class.java).putExtra(INTENT_DATA_KEY, item.id))
+    private fun navigateToDetailView(id: kotlin.Long) {
+        startActivity(Intent(this, DetailActivity::class.java).putExtra(INTENT_DATA_KEY, id))
     }
 
     private fun showError(failure: FailureVo?) {
@@ -109,3 +120,7 @@ class MainActivity : AppCompatActivity(),
     }
 
 }
+
+@ExperimentalCoroutinesApi
+private fun MainActivity.getMainComponent(): MainComponent =
+    (application as MainComponentFactoryProvider).provideMainComponentFactory().create()
