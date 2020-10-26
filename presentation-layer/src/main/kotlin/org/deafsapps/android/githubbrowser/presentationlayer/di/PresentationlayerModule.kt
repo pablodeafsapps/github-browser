@@ -6,6 +6,8 @@ import dagger.Subcomponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.deafsapps.android.githubbrowser.domainlayer.base.BaseDomainLayerBridge
 import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBoWrapper
+import org.deafsapps.android.githubbrowser.domainlayer.feature.detail.DetailDomainLayerBridge
 import org.deafsapps.android.githubbrowser.domainlayer.feature.main.MainDomainLayerBridge
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmViewModel
 import org.deafsapps.android.githubbrowser.presentationlayer.feature.detail.view.state.DetailState
@@ -81,7 +83,7 @@ class MainModule {
     @ActivityScope
     @Provides
     @Named(MAIN_VIEW_MODEL_TAG)
-    fun provideMainViewModel(viewModel: MainViewModel): @JvmSuppressWildcards BaseMvvmViewModel<MainDomainLayerBridge<List<DataRepoBo>>, MainState> =
+    fun provideMainViewModel(viewModel: MainViewModel): @JvmSuppressWildcards BaseMvvmViewModel<MainDomainLayerBridge<DataRepoBoWrapper>, MainState> =
         viewModel
 
 }
@@ -111,7 +113,7 @@ class DetailModule {
     @ActivityScope
     @Provides
     @Named(DETAIL_VIEW_MODEL_TAG)
-    fun provideDetailViewModel(viewModel: DetailViewModel): @JvmSuppressWildcards BaseMvvmViewModel<BaseDomainLayerBridge.None, DetailState> =
+    fun provideDetailViewModel(viewModel: DetailViewModel): @JvmSuppressWildcards BaseMvvmViewModel<DetailDomainLayerBridge<DataRepoBo>, DetailState> =
         viewModel
 
 }

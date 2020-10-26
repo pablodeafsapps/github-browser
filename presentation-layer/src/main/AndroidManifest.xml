@@ -4,7 +4,6 @@
     package="org.deafsapps.android.githubbrowser.presentationlayer">
 
     <application
-        android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">

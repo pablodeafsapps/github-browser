@@ -14,7 +14,6 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = Libraries.testRunner
     }
     buildTypes {
         named("release").configure {
@@ -29,6 +28,13 @@ android {
     lintOptions {
         isAbortOnError = false
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 tasks {
@@ -42,7 +48,6 @@ tasks {
 }
 
 dependencies {
-    implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.kotlinCoroutinesCore)
     implementation(Libraries.kotlinCoroutinesAndroid)

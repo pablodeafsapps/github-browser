@@ -15,7 +15,6 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = Libraries.instrumentationRunner
     }
     buildTypes {
         named("release").configure {
@@ -50,7 +49,6 @@ tasks {
 }
 
 dependencies {
-    implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.kotlinCoroutinesCore)
     implementation(Libraries.retrofitCoroutinesAdapter)
@@ -67,9 +65,4 @@ dependencies {
     testImplementation(Libraries.junit)
     testImplementation(Libraries.mockitoKotlin)
     testImplementation(Libraries.kotlinCoroutinesTest)
-    // testing dependencies - Instrumentation Test
-    androidTestImplementation(Libraries.mockitoAndroid)
-    androidTestImplementation(Libraries.testRunner)
-    androidTestImplementation(Libraries.testRules)
-    androidTestImplementation(Libraries.espresso)
 }

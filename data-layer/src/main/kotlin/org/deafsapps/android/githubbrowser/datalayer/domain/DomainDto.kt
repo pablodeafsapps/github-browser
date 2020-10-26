@@ -5,8 +5,11 @@ import com.squareup.moshi.JsonClass
 import okhttp3.ResponseBody
 import org.deafsapps.android.githubbrowser.domainlayer.R
 
+@JsonClass(generateAdapter = true)
 data class GithubRepoDtoWrapper(
-    val items: List<GithubRepoDto>
+    @Json(name = "totalCount") val totalCount: Int?,
+    @Json(name = "incomplete_results") val incompleteResults: Boolean?,
+    @Json(name = "items") val items: List<GithubRepoDto>
 )
 
 @JsonClass(generateAdapter = true)
@@ -17,7 +20,8 @@ data class GithubRepoDto(
     @Json(name = "html_url") val htmlUrl: String?,
     @Json(name = "description") val description: String?,
     @Json(name = "stargazers_count") val stars: Int?,
-    @Json(name = "forks_count") val forks: Int?
+    @Json(name = "forks_count") val forks: Int?,
+    @Json(name = "language") val language: String?
 )
 
 @JsonClass(generateAdapter = true)

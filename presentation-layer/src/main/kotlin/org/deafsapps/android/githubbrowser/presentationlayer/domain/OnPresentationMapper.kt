@@ -4,8 +4,6 @@ import org.deafsapps.android.githubbrowser.domainlayer.domain.FailureBo
 import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
 import org.deafsapps.android.githubbrowser.domainlayer.domain.OwnerBo
 
-private const val DEFAULT_STRING_VALUE = "none"
-
 fun List<DataRepoBo>.boToVo() = map { it.boToVo() }
 
 fun DataRepoBo.boToVo() = DataRepoVo(
@@ -15,7 +13,8 @@ fun DataRepoBo.boToVo() = DataRepoVo(
     htmlUrl = htmlUrl,
     description = description,
     stars = stars,
-    forks = forks
+    forks = forks,
+    language = language
 )
 
 private fun OwnerBo.boToVo() = OwnerVo(
@@ -37,6 +36,7 @@ fun FailureBo.boToVoFailure(): FailureVo =
         is FailureBo.InputParamsError -> FailureVo.Error(msgRes = msgRes)
         is FailureBo.RequestError -> FailureVo.Error(msgRes = msgRes)
         is FailureBo.ServerError -> FailureVo.Error(msgRes = msgRes)
+        is FailureBo.NoCachedData -> FailureVo.NoCachedData(msgRes = msgRes)
         is FailureBo.NoData -> FailureVo.NoData(msgRes = msgRes)
         is FailureBo.NoConnection -> FailureVo.NoConnection(msgRes = msgRes)
         is FailureBo.Unknown -> FailureVo.Unknown(msgRes = msgRes)

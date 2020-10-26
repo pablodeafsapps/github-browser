@@ -15,7 +15,6 @@ android {
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = Libraries.testRunner
     }
     buildTypes {
         named("release").configure {
@@ -25,8 +24,6 @@ android {
     }
     sourceSets {
         getByName("main") { java.srcDir("src/main/kotlin") }
-        getByName("test") { java.srcDir("src/test/kotlin") }
-        getByName("androidTest") { java.srcDir("src/androidTest/kotlin") }
     }
     buildFeatures {
         viewBinding = true
@@ -57,7 +54,6 @@ tasks {
 }
 
 dependencies {
-    implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.lifecycle)
@@ -65,17 +61,11 @@ dependencies {
     implementation(Libraries.constraintLayout)
     implementation(Libraries.recyclerview)
     implementation(Libraries.cardview)
+    implementation(Libraries.swiperefreshlayout)
     // other modules
     implementation(project(":domain-layer"))
     // 3rd party libraries
     kapt(Libraries.daggerCompiler)
-    // testing dependencies - Unit Test
-    testImplementation(Libraries.junit)
-    testImplementation(Libraries.mockitoKotlin)
-    testImplementation(Libraries.kotlinCoroutinesTest)
-    // testing dependencies - Instrumentation Test
-    androidTestImplementation(Libraries.mockitoAndroid)
-    androidTestImplementation(Libraries.testRunner)
-    androidTestImplementation(Libraries.testRules)
-    androidTestImplementation(Libraries.espresso)
+    implementation(Libraries.glide)
+    kapt(Libraries.glideCompiler)
 }

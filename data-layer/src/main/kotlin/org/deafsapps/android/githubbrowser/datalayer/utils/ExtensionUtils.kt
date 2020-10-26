@@ -19,7 +19,6 @@ import retrofit2.Response
  * valid data connection. It also takes into account the Android version available.
  *
  * @author Pablo L. Sordo Martínez
- * @since 1.0
  */
 fun Context.isNetworkAvailable(): Boolean {
     val connectivityManager =
@@ -47,7 +46,6 @@ fun Context.isNetworkAvailable(): Boolean {
  * a parametrized 'Either' type is returned. All credits to Félix Castillo Moya (Joséfelix.castillomoya@gmail.com).
  *
  * @author Pablo L. Sordo Martínez
- * @since 1.0
  */
 fun <T, R> Response<T>.safeCall(
     transform: (T) -> R,
@@ -77,7 +75,6 @@ fun <T, R> Response<T>.safeCall(
  * domain layer.
  *
  * @author Pablo L. Sordo Martínez
- * @since 1.0
  */
 fun <T> Response<T>?.handleDataSourceError(): Either<FailureBo, Nothing> =
     when (this?.code()) {

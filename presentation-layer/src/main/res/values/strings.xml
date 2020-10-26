@@ -1,8 +1,11 @@
 <resources>
-    <string name="tv_title_text">GITHUB REPOSITORIES</string>
+    <string name="tv_title_text">Popular Github Repos</string>
     <string name="tv_no_data_text">No Data</string>
-    <string name="tv_placeholder_text_one">This text represents a data repository to be fetched and displayed on the main screen</string>
-    <string name="tv_placeholder_text_two">This text represents a timestamp</string>
-    <string name="tv_detail_id">#%1$s</string>
+    <string name="tv_placeholder_name">This text represents a data repository name</string>
+    <string name="tv_placeholder_description">This text represents a data repository description to be included in the corresponding \'ViewHolder\'</string>
+    <string name="tv_placeholder_timestamp">This text represents a timestamp</string>
+    <string name="tv_placeholder_na">-</string>
+    <string name="tv_detail_html_url"><a>%1$s</a></string>
     <string name="default_content_description">image</string>
+    <string name="default_repo_data">&#160;%1$s&#160;</string>
 </resources>

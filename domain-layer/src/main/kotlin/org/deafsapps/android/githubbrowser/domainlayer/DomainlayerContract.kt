@@ -35,7 +35,9 @@ interface DomainlayerContract {
         }
 
         interface DataRepository<out T> {
-            suspend fun fetchDataRepositories(): Either<FailureBo, T>
+            suspend fun fetchAndCacheDataRepositories(): Either<FailureBo, T>
+            suspend fun fetchLocalDataRepositories(): Either<FailureBo, T>
+            suspend fun clearDataCache(): Either<FailureBo, Boolean>
         }
 
     }

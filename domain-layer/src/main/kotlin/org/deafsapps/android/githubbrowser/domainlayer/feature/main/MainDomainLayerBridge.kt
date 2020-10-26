@@ -21,11 +21,11 @@ interface MainDomainLayerBridge<out S> : BaseDomainLayerBridge {
 
 class MainDomainLayerBridgeImpl @Inject constructor(
     @Named(FETCH_DATA_REPOSITORIES_UC_TAG)
-    private val fetchDataRepositoriesUc: @JvmSuppressWildcards DomainlayerContract.Presentationlayer.UseCase<Any, List<DataRepoBo>>
-) : MainDomainLayerBridge<List<DataRepoBo>> {
+    private val fetchDataRepositoriesUc: @JvmSuppressWildcards DomainlayerContract.Presentationlayer.UseCase<Any, DataRepoBoWrapper>
+) : MainDomainLayerBridge<DataRepoBoWrapper> {
 
     override fun fetchDataRepositories(
-        scope: CoroutineScope, onResult: (Either<FailureBo, List<DataRepoBo>>) -> Unit
+        scope: CoroutineScope, onResult: (Either<FailureBo, DataRepoBoWrapper>) -> Unit
     ) {
         fetchDataRepositoriesUc.invoke(scope = scope, onResult = onResult)
     }

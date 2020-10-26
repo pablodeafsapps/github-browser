@@ -13,80 +13,116 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvDataRepoId"
+        android:id="@+id/tvDetailDescription"
         android:layout_width="@dimen/fully_stretchable"
         android:layout_height="@dimen/fully_stretchable"
         android:layout_marginStart="@dimen/eight"
-        android:layout_marginLeft="@dimen/eight"
+        android:layout_marginTop="@dimen/eight"
         android:layout_marginEnd="@dimen/eight"
-        android:layout_marginRight="@dimen/eight"
-        android:gravity="bottom"
+        android:layout_marginBottom="@dimen/eight"
+        android:ellipsize="end"
+        android:padding="@dimen/sixteen"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/guidelineHor06"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvId"
-        tools:text="Joke text" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvCategories"
-        android:layout_width="@dimen/fully_stretchable"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/eight"
-        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_twenty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="[explicit,nerd]" />
+        app:layout_constraintTop_toBottomOf="@id/tvDetailLanguage"
+        tools:text="Data repo text" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvId"
+        android:id="@+id/tvDetailName"
         android:layout_width="@dimen/fully_stretchable"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/eight"
         android:padding="@dimen/eight"
-        android:text="@string/tv_detail_id"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/tvDataRepoId"
+        android:textSize="@dimen/text_twenty_four"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="#24" />
+        tools:text="Dagger 2" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivDataRepo"
-        android:layout_width="@dimen/fully_stretchable"
-        android:layout_height="@dimen/fully_stretchable"
+        android:id="@+id/ivDetailProfilePic"
+        android:layout_width="@dimen/hundred"
+        android:layout_height="@dimen/hundred"
+        android:layout_marginEnd="@dimen/eight"
         android:adjustViewBounds="true"
         android:contentDescription="@string/default_content_description"
-        app:layout_constraintBottom_toTopOf="@+id/tvCategories"
+        app:layout_constraintBottom_toBottomOf="@id/tvDetailLanguage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guidelineVer04"
-        app:layout_constraintTop_toTopOf="@id/guidelineHor06"
+        app:layout_constraintTop_toTopOf="@id/tvDetailStars"
         app:srcCompat="@drawable/img_github_logo" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHor06"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailStars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".6" />
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/eight"
+        android:drawableStart="@drawable/ic_star"
+        android:gravity="center"
+        android:padding="@dimen/eight"
+        android:text="@string/tv_placeholder_na"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailHtmlUrl"
+        tools:text=" 234 " />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVer04"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailForks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".4" />
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/four"
+        android:drawableStart="@drawable/ic_fork"
+        android:gravity="center"
+        android:padding="@dimen/eight"
+        android:text="@string/tv_placeholder_na"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailStars"
+        tools:text=" 98 " />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/four"
+        android:drawableStart="@drawable/ic_language"
+        android:gravity="center"
+        android:padding="@dimen/eight"
+        android:text="@string/tv_placeholder_na"
+        android:textColor="#003300"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailForks"
+        tools:text=" Kotlin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailHtmlUrl"
+        android:layout_width="@dimen/fully_stretchable"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_marginEnd="@dimen/eight"
+        android:autoLink="web"
+        android:gravity="center"
+        android:textSize="@dimen/text_twelve"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailName"
+        tools:text="https://www.google.com" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
