@@ -1,6 +1,6 @@
 # Github Browser
 
-![alt text](docs/images/github-logo.png)
+<img src="docs/images/github-logo.png" alt="Github logo" width="200">
 
 **Github Browser** is a sample baseline project which aims to show a standard state-of-the-art proposal for Android development.
 
@@ -18,6 +18,18 @@ Clone this repository and import into **Android Studio**
 > git clone https://github.com/pablodeafsapps/github-browser.git
 ```
 
+##### Configure Project
+In order to synchronize, build, and run the application, you need to create a `keystore.properties` file in the project root. This mandatory file must have the following structure:
+
+```
+storeFile=storeFile
+storePassword=storePassword
+keyAlias=keyAlias
+keyPassword=keyPassword
+```
+
+The values of the above fields are irrelevant for _debug_ mode. However, you need the actual values of your Google account when on _release_ mode.
+
 
 ## Generating signed APK
 From Android Studio:
@@ -29,7 +41,7 @@ From Android Studio:
 ## Architecture and project organization
 To This app makes employs a class hierarchy based on the [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) paradigm, a concept with an increasing popularity thanks to Robert C. Martin (Uncle Bob).
 
-![alt text](docs/images/clean-architecture-cejas-1.png)
+<img src="docs/images/clean-architecture-cejas-1.png" alt="Clean Architecture" width="500">
 
 ### Class hierarchy
 Among the different implementations for Android applications of the aforementioned paradigm, there are remarkable contributions such as the ones from [Antonio Leiva](https://antonioleiva.com/clean-architecture-android/) and [Fernando Cejas](https://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/). Precisely, this latter work has served as the main inspiration for this application architecture.
@@ -55,7 +67,7 @@ In order to facilitate the interaction between the above described layers, Githu
 ### Coroutines
 Since _multithreading_ has historically been a challenge in Android Development, [coroutines](https://codelabs.developers.google.com/codelabs/kotlin-coroutines/#0) are extensively utilized. This is one of the most interesting and appealing features recently introduced in Kotlin.
 
-<img src="docs/images/coroutines-scheme.jpg" width="500">
+<img src="docs/images/coroutines-scheme.jpg" alt="Coroutines" width="500">
 
 The main advantage that supports the usage of _coroutines_ is an easy and enhanced multithreading management. _Coroutines_  allow to turn asynchronous operations in synchronous code, without affecting the application overall performance.
 
