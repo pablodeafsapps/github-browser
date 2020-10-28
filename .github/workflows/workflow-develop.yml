@@ -23,8 +23,6 @@ jobs:
       - name: Unit tests
         run: |
           echo -e "storeFile=\"storeFile\"\nstorePassword=\"storePassword\"\nkeyAlias=\"keyAlias\"\nkeyPassword=\"keyPassword\"" > keystore.properties
-          mkdir -p app/src/debug/res/values
-          echo -e "<resources>\n<string name=\"google_maps_key\" templateMergeStrategy=\"preserve\" translatable=\"false\"></string>\n</resources>" > app/src/debug/res/values/google_maps_api.xml
           bash ./gradlew testDebugUnitTest --stacktrace
 
   apk:
@@ -42,10 +40,6 @@ jobs:
           DEBUG_API_KEY: ${{ secrets.DEBUG_API_KEY }}
         run: |
           echo -e "storeFile=\"storeFile\"\nstorePassword=\"storePassword\"\nkeyAlias=\"keyAlias\"\nkeyPassword=\"keyPassword\"" > keystore.properties
-
-          mkdir -p app/src/debug/res/values
-          echo -e "<resources>\n<string name=\"google_maps_key\" templateMergeStrategy=\"preserve\" translatable=\"false\">$DEBUG_API_KEY</string>\n</resources>" > app/src/debug/res/values/google_maps_api.xml
-
           bash ./gradlew assembleDebug --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v1
