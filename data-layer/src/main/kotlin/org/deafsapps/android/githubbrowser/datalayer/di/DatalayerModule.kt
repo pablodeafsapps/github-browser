@@ -8,6 +8,9 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.deafsapps.android.githubbrowser.datalayer.BuildConfig
+import org.deafsapps.android.githubbrowser.datalayer.datasource.AndroidDataSource
+import org.deafsapps.android.githubbrowser.datalayer.datasource.ConnectivityDataSource
+import org.deafsapps.android.githubbrowser.datalayer.datasource.ConnectivityDataSource.Companion.CONNECTIVITY_DATA_SOURCE_TAG
 import org.deafsapps.android.githubbrowser.datalayer.datasource.GithubDataSource
 import org.deafsapps.android.githubbrowser.datalayer.datasource.RepositoryDataSource
 import org.deafsapps.android.githubbrowser.datalayer.datasource.RepositoryDataSource.Companion.REPOSITORY_DATA_SOURCE_TAG
@@ -29,15 +32,24 @@ object RepositoryModule {
     @Provides
     @Named(DATA_REPOSITORY_TAG)
     fun provideDataRepository(
+        @Named(CONNECTIVITY_DATA_SOURCE_TAG)
+        connectivityDs: ConnectivityDataSource,
         @Named(REPOSITORY_DATA_SOURCE_TAG)
         repositoryDs: RepositoryDataSource
-    ): @JvmSuppressWildcards DomainlayerContract.Datalayer.DataRepository<List<DataRepoBo>> =
-        Repository.apply { repositoryDataSource = repositoryDs }
+    ): @JvmSuppressWildcards DomainlayerContract.Datalayer.DataRepository<DataRepoBoWrapper> =
+        Repository.apply {
+            connectivityDataSource = connectivityDs
+            repositoryDataSource = repositoryDs
+        }
 
 }
 
 @Module
 class DatasourceModule {
+
+    @Provides
+    @Named(CONNECTIVITY_DATA_SOURCE_TAG)
+    fun provideConnectivityDataSource(ds: AndroidDataSource): ConnectivityDataSource = ds
 
     @Provides
     @Named(REPOSITORY_DATA_SOURCE_TAG)

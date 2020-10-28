@@ -5,10 +5,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.deafsapps.android.githubbrowser.domainlayer.base.BaseDomainLayerBridge
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
+import org.deafsapps.android.githubbrowser.domainlayer.feature.detail.DetailDomainLayerBridge
+import org.deafsapps.android.githubbrowser.presentationlayer.R
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmView
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmViewModel
 import org.deafsapps.android.githubbrowser.presentationlayer.base.ScreenState
@@ -25,11 +28,11 @@ import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 class DetailActivity : AppCompatActivity(),
-    BaseMvvmView<DetailViewModel, BaseDomainLayerBridge.None, DetailState> {
+    BaseMvvmView<DetailViewModel, DetailDomainLayerBridge<DataRepoBo>, DetailState> {
 
     @Inject
     @Named(DETAIL_VIEW_MODEL_TAG)
-    lateinit var _viewModel: BaseMvvmViewModel<BaseDomainLayerBridge.None, DetailState>
+    lateinit var _viewModel: BaseMvvmViewModel<DetailDomainLayerBridge<DataRepoBo>, DetailState>
     override val viewModel: DetailViewModel by lazy { _viewModel as DetailViewModel }
     private lateinit var viewBinding: ActivityDetailBinding
 
@@ -37,9 +40,9 @@ class DetailActivity : AppCompatActivity(),
         getDetailComponent().inject(this)
         super.onCreate(savedInstanceState)
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
+
         initModel()
         setContentView(viewBinding.root)
-//        jokeItem = intent.getParcelableExtra(INTENT_DATA_KEY) as? JokeVo
     }
 
     override fun onResume() {
@@ -61,17 +64,24 @@ class DetailActivity : AppCompatActivity(),
                 when (screenState) {
                     is ScreenState.Idle -> hideLoading()
                     is ScreenState.Loading -> showLoading()
-                    is ScreenState.Render<DetailState> -> processRenderState(screenState.renderState)
+                    is ScreenState.Render<DetailState> -> {
+                        hideLoading()
+                        processRenderState(screenState.renderState)
+                    }
                 }
             }
         }
     }
 
-    private fun loadDataRepo(item: Long) {
+    private fun loadDataRepo(item: DataRepoBo) {
         with(viewBinding) {
-//            tvId.text = getString(R.string.tv_detail_id, item.name)
-//            tvJoke.text = HtmlCompat.fromHtml(item.joke ?: "", HtmlCompat.FROM_HTML_MODE_COMPACT)
-//            tvCategories.text = item.categories.takeIf { it?.isNotEmpty() == true }?.toString()
+            tvDetailName.text = item.name
+            tvDetailHtmlUrl.text = item.htmlUrl
+            Glide.with(this@DetailActivity).load(item.owner.profilePic).into(ivDetailProfilePic)
+            tvDetailStars.text = getString(R.string.default_repo_data, item.stars.toString())
+            tvDetailForks.text = getString(R.string.default_repo_data, item.forks.toString())
+            tvDetailLanguage.text = getString(R.string.default_repo_data, item.language)
+            tvDetailDescription.text = item.description
         }
     }
 

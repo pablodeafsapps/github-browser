@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBo
+import org.deafsapps.android.githubbrowser.domainlayer.domain.DataRepoBoWrapper
 import org.deafsapps.android.githubbrowser.domainlayer.feature.main.MainDomainLayerBridge
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmView
 import org.deafsapps.android.githubbrowser.presentationlayer.base.BaseMvvmViewModel
@@ -34,11 +34,11 @@ const val INTENT_DATA_KEY = "dataRepoItemId"
 
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity(),
-    BaseMvvmView<MainViewModel, MainDomainLayerBridge<List<DataRepoBo>>, MainState> {
+    BaseMvvmView<MainViewModel, MainDomainLayerBridge<DataRepoBoWrapper>, MainState> {
 
     @Inject
     @Named(MAIN_VIEW_MODEL_TAG)
-    lateinit var _viewModel: BaseMvvmViewModel<MainDomainLayerBridge<List<DataRepoBo>>, MainState>
+    lateinit var _viewModel: BaseMvvmViewModel<MainDomainLayerBridge<DataRepoBoWrapper>, MainState>
     override val viewModel: MainViewModel by lazy { _viewModel as MainViewModel }
     private lateinit var viewBinding: ActivityMainBinding
 
@@ -76,12 +76,19 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initView() {
-        with(viewBinding.rvItems) {
-            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-            adapter = DataRepoListAdapter(itemList = mutableListOf()) { action ->
-                when (action) {
-                    is DataViewAction.DataRepoTapped -> viewModel.onDataRepositorySelected(action.item.id)
-                    DataViewAction.DataRepoLongSelected -> Toast.makeText(this@MainActivity, "Item long-clicked", Toast.LENGTH_SHORT).show()
+        with(viewBinding) {
+            srLayout.apply {
+                setOnRefreshListener {
+                    viewModel.onRefreshTriggered()
+                    this@apply.isRefreshing = false
+                }
+            }
+            rvItems.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+                adapter = DataRepoListAdapter(itemList = mutableListOf()) { action ->
+                    when (action) {
+                        is DataViewAction.DataRepoTapped -> viewModel.onDataRepositorySelected(action.item.id)
+                    }
                 }
             }
         }
@@ -108,7 +115,7 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    private fun navigateToDetailView(id: kotlin.Long) {
+    private fun navigateToDetailView(id: Long) {
         startActivity(Intent(this, DetailActivity::class.java).putExtra(INTENT_DATA_KEY, id))
     }
 

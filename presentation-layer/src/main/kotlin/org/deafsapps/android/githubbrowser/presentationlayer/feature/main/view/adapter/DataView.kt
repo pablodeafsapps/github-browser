@@ -9,7 +9,7 @@ sealed class DataView(val viewType: Int)  {
     }
 
     open class UpdateTimestamp : DataView(viewType = DataViewType.TYPE_DATE.type)
-    open class DataRepoType : DataView(viewType = DataViewType.TYPE_REPO.type)
+    open class DataRepo : DataView(viewType = DataViewType.TYPE_REPO.type)
 
 }
 

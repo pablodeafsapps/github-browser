@@ -6,14 +6,14 @@ import org.deafsapps.android.githubbrowser.domainlayer.domain.FailureBo
 import org.deafsapps.android.githubbrowser.domainlayer.domain.OwnerBo
 
 private const val DEFAULT_INTEGER_VALUE = -1
-private const val DEFAULT_LONG_VALUE = -1L
 private const val DEFAULT_BOOLEAN_VALUE = false
-private const val DEFAULT_STRING_VALUE = "none"
+private const val DEFAULT_LONG_VALUE = -1L
+private const val DEFAULT_STRING_VALUE = "n/a"
 
-fun GithubRepoDtoWrapper.dtoToBo() = DataRepoBoWrapper(
-//    totalCount = totalCount ?: DEFAULT_INTEGER_VALUE,
-//    incompleteResults = incompleteResults ?: DEFAULT_BOOLEAN_VALUE,
-    items = items.dataRepoListToBo()
+fun GithubRepoDtoWrapper.githubToDataRepoWrapperBo() = DataRepoBoWrapper(
+    totalCount = totalCount ?: DEFAULT_INTEGER_VALUE,
+    incompleteResults = incompleteResults ?: DEFAULT_BOOLEAN_VALUE,
+    items =  items.dataRepoListToBo()
 )
 
 fun List<GithubRepoDto>.dataRepoListToBo() = map { it.dtoToBo() }
@@ -25,7 +25,8 @@ private fun GithubRepoDto.dtoToBo() = DataRepoBo(
     htmlUrl = htmlUrl ?: DEFAULT_STRING_VALUE,
     description = description ?: DEFAULT_STRING_VALUE,
     stars = stars ?: DEFAULT_INTEGER_VALUE,
-    forks = forks ?: DEFAULT_INTEGER_VALUE
+    forks = forks ?: DEFAULT_INTEGER_VALUE,
+    language = language ?: DEFAULT_STRING_VALUE
 )
 
 private fun getDummyOwnerBo() = OwnerBo(
