@@ -25,8 +25,6 @@ jobs:
       - name: Unit tests
         run: |
           echo -e "storeFile=\"storeFile\"\nstorePassword=\"storePassword\"\nkeyAlias=\"keyAlias\"\nkeyPassword=\"keyPassword\"" > keystore.properties
-          mkdir -p app/src/release/res/values
-          echo -e "<resources>\n<string name=\"google_maps_key\" templateMergeStrategy=\"preserve\" translatable=\"false\"></string>\n</resources>" > app/src/release/res/values/google_maps_api.xml
           bash ./gradlew testReleaseUnitTest --stacktrace
 
   apk:
@@ -50,10 +48,6 @@ jobs:
           echo "$RELEASE_KEYSTORE" > release.keystore.asc
           gpg -d --passphrase "$STORE_PASSWORD" --batch release.keystore.asc > app/release.keystore
           echo -e "storeFile=release.keystore\nstorePassword=$STORE_PASSWORD\nkeyAlias=$KEY_ALIAS\nkeyPassword=$KEY_PASSWORD" > keystore.properties
-
-          mkdir -p app/src/release/res/values
-          echo -e "<resources>\n<string name=\"google_maps_key\" templateMergeStrategy=\"preserve\" translatable=\"false\">$RELEASE_API_KEY</string>\n</resources>" > app/src/release/res/values/google_maps_api.xml
-
           bash ./gradlew assembleRelease --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v1
