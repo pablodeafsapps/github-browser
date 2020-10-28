@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_no_connection">No Connection</string>
+    <string name="error_params_cannot_be_empty">Params cannot be empty</string>
+    <string name="error_params_both_email_password_required">Both e-mail and password are required</string>
+    <string name="error_bad_request">Bad Request</string>
+    <string name="error_no_cached_data">No Cached Data</string>
+    <string name="error_socket_timeout_exception">Socket Timeout</string>
+    <string name="error_no_data">No Data</string>
+    <string name="error_server">Server Error</string>
+    <string name="error_unknown">Unknown Error</string>
+</resources>

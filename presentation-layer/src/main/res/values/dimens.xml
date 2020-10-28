@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- base -->
+    <dimen name="fully_stretchable">0dp</dimen>
+    <dimen name="four">4dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="thirty_two">32dp</dimen>
+    <dimen name="sixty">60dp</dimen>
+    <dimen name="hundred">100dp</dimen>
+    <!-- view -->
+    <dimen name="cardview_height">200dp</dimen>
+    <!-- text -->
+    <dimen name="text_ten">10sp</dimen>
+    <dimen name="text_twelve">12sp</dimen>
+    <dimen name="text_eighteen">18sp</dimen>
+    <dimen name="text_twenty">20sp</dimen>
+    <dimen name="text_twenty_four">24sp</dimen>
+</resources>

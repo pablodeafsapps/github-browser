@@ -1,0 +1,54 @@
+name: Android Pull Request & Develop CI
+
+on:
+  pull_request:
+    branches:
+      - 'develop'
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Unit tests
+        run: |
+          echo -e "storeFile=\"storeFile\"\nstorePassword=\"storePassword\"\nkeyAlias=\"keyAlias\"\nkeyPassword=\"keyPassword\"" > keystore.properties
+          mkdir -p app/src/debug/res/values
+          echo -e "<resources>\n<string name=\"google_maps_key\" templateMergeStrategy=\"preserve\" translatable=\"false\"></string>\n</resources>" > app/src/debug/res/values/google_maps_api.xml
+          bash ./gradlew testDebugUnitTest --stacktrace
+
+  apk:
+    name: Generate Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build debug APK
+        env:
+          DEBUG_API_KEY: ${{ secrets.DEBUG_API_KEY }}
+        run: |
+          echo -e "storeFile=\"storeFile\"\nstorePassword=\"storePassword\"\nkeyAlias=\"keyAlias\"\nkeyPassword=\"keyPassword\"" > keystore.properties
+
+          mkdir -p app/src/debug/res/values
+          echo -e "<resources>\n<string name=\"google_maps_key\" templateMergeStrategy=\"preserve\" translatable=\"false\">$DEBUG_API_KEY</string>\n</resources>" > app/src/debug/res/values/google_maps_api.xml
+
+          bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk

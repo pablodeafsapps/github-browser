@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail__cl__root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".feature.detail.view.ui.DetailActivity">
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailDescription"
+        android:layout_width="@dimen/fully_stretchable"
+        android:layout_height="@dimen/fully_stretchable"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_marginEnd="@dimen/eight"
+        android:layout_marginBottom="@dimen/eight"
+        android:ellipsize="end"
+        android:padding="@dimen/sixteen"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_twenty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailLanguage"
+        tools:text="Data repo text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="@dimen/fully_stretchable"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/eight"
+        android:padding="@dimen/eight"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_twenty_four"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Dagger 2" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDetailProfilePic"
+        android:layout_width="@dimen/hundred"
+        android:layout_height="@dimen/hundred"
+        android:layout_marginEnd="@dimen/eight"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/default_content_description"
+        app:layout_constraintBottom_toBottomOf="@id/tvDetailLanguage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDetailStars"
+        app:srcCompat="@drawable/img_github_logo" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/eight"
+        android:drawableStart="@drawable/ic_star"
+        android:gravity="center"
+        android:padding="@dimen/eight"
+        android:text="@string/tv_placeholder_na"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailHtmlUrl"
+        tools:text=" 234 " />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailForks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/four"
+        android:drawableStart="@drawable/ic_fork"
+        android:gravity="center"
+        android:padding="@dimen/eight"
+        android:text="@string/tv_placeholder_na"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailStars"
+        tools:text=" 98 " />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/four"
+        android:drawableStart="@drawable/ic_language"
+        android:gravity="center"
+        android:padding="@dimen/eight"
+        android:text="@string/tv_placeholder_na"
+        android:textColor="#003300"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailForks"
+        tools:text=" Kotlin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetailHtmlUrl"
+        android:layout_width="@dimen/fully_stretchable"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/eight"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_marginEnd="@dimen/eight"
+        android:autoLink="web"
+        android:gravity="center"
+        android:textSize="@dimen/text_twelve"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailName"
+        tools:text="https://www.google.com" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
